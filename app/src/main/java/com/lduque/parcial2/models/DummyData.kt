@@ -57,3 +57,4 @@ val products = listOf(
     )
 )
 
+val shoppingCart = mutableStateListOf<Product>()
