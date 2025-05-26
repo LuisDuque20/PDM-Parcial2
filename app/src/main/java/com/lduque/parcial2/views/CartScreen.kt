@@ -10,13 +10,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.lduque.parcial2.components.navBarTopBar
-import com.lduque.parcial2.models.shoppingCart
+import com.lduque.parcial2.viewModel.CartScreenVM
 
 @Composable
-fun CartScreen(navController: NavController) {
+fun CartScreen(navController: NavController, viewModel: CartScreenVM = viewModel()) {
+    val cart = viewModel.shoppingCart
+
     navBarTopBar(navController) {
         Column(
             modifier = Modifier
@@ -28,7 +31,7 @@ fun CartScreen(navController: NavController) {
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            if (shoppingCart.isEmpty()) {
+            if (cart.isEmpty()) {
                 Box(
                     modifier = Modifier.fillMaxSize(),
                     contentAlignment = Alignment.Center
@@ -37,7 +40,7 @@ fun CartScreen(navController: NavController) {
                 }
             } else {
                 LazyColumn {
-                    items(shoppingCart) { product ->
+                    items(cart) { product ->
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
